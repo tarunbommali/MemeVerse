@@ -3,7 +3,7 @@ import { MdLanguage } from "react-icons/md";
 const Header = () => {
   return (
     <header className="flex justify-between px-16 items-center bg-amber-500 text-white p-4">
-      <h2 className="text-2xl font-thin">MemeVerse</h2>
+      <h2 className="text-2xl font-thin">MemeSync</h2>
       <div className="flex items-center">
       <nav>
         <a className="mx-2" href="/">

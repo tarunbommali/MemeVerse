@@ -9,7 +9,7 @@ const About = () => {
         transition={{ duration: 0.7 }}
         className="text-5xl md:text-6xl font-extrabold text-center text-pink-600 mb-6"
       >
-        Welcome to MemeVerse 😂
+        Welcome to MemeSync 😂
       </motion.h1>
 
       <motion.p
@@ -39,7 +39,7 @@ const About = () => {
       </div>
 
       <div className="mt-12 text-center text-sm text-gray-500">
-        Made with 💖 + ☕ + 😂 by the MemeVerse Team
+        Made with 💖 + ☕ + 😂 by the MemeSync Team.
       </div>
     </div>
   );
