@@ -1,6 +1,17 @@
 import { motion } from "framer-motion";
- 
+import aboutLocales from "../locales/aboutLocales";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/appStore";
+
+type LocaleKey = keyof typeof aboutLocales;
+
 const About = () => {
+  // 🔁 Get selected language from Redux store
+  const currentLang = useSelector((state: RootState) => state.locale.language);
+
+  // ✅ Fallback to English if currentLang not found in aboutLocales
+  const content = aboutLocales[currentLang as LocaleKey] || aboutLocales["en"];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-100 flex flex-col items-center justify-center px-4 py-10">
       <motion.h1
@@ -9,7 +20,7 @@ const About = () => {
         transition={{ duration: 0.7 }}
         className="text-5xl md:text-6xl font-extrabold text-center text-pink-600 mb-6"
       >
-        Welcome to MemeSync 😂
+        {content.heading}
       </motion.h1>
 
       <motion.p
@@ -18,28 +29,24 @@ const About = () => {
         transition={{ delay: 0.5 }}
         className="text-lg md:text-xl text-center max-w-3xl text-gray-700 mb-10"
       >
-        In a world full of seriousness, we chose chaos... and memes! MemeVerse is your daily dose of dopamine
-        delivered straight to your screen. Whether you're into dank memes, clean fun, or just weird internet humor,
-        we've got you covered.
+        {content.paragraph}
       </motion.p>
 
       <div className="bg-white shadow-xl rounded-xl p-6 md:p-10 max-w-3xl w-full text-center space-y-4 border-2 border-dashed border-yellow-300">
-        <p className="text-gray-800 text-md md:text-lg">
-          🎯 Our mission: Spread laughter, one meme at a time.
-        </p>
-        <p className="text-gray-800 text-md md:text-lg">
-          💡 Got memes? Upload them! Love memes? Save them! Bored? Scroll infinitely.
-        </p>
-        <p className="text-gray-800 text-md md:text-lg">
-          🧠 Built for meme lords, by meme nerds.
-        </p>
-        <p className="text-pink-500 font-bold mt-4">
-          Remember: A meme a day keeps the stress away.
-        </p>
+        {content.points.map((point, index) => (
+          <p
+            key={index}
+            className={`text-md md:text-lg ${
+              index === content.points.length - 1 ? "text-pink-500 font-bold mt-4" : "text-gray-800"
+            }`}
+          >
+            {point}
+          </p>
+        ))}
       </div>
 
       <div className="mt-12 text-center text-sm text-gray-500">
-        Made with 💖 + ☕ + 😂 by the MemeSync Team.
+        {content.footer}
       </div>
     </div>
   );

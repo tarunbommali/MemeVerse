@@ -17,7 +17,9 @@ const Home = () => {
     try {
       const response = await fetch(MEMES_API_URL);
       const data = await response.json();
-      setMemes(data.memes);
+
+      setMemes((prevData) => [...prevData, ...data.memes]);
+
       setLoading(false);
     } catch (error) {
       console.error("Error fetching memes:", error);
@@ -27,22 +29,35 @@ const Home = () => {
 
   useEffect(() => {
     handleFetchMeme();
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleScroll = () => {
+    if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+      console.log("Fetching more data...");
+      handleFetchMeme();
+    }
+  };
+
   return (
-    <div className="container mx-auto p-4">
-      <div className="container mx-auto p-4">
+    <div className="container mx-auto  md:p-4">
+      <div className="container mx-auto md:p-4">
         <ul className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-4  gap-4 p-4 mb-5">
-          {loading
-            ? Array.from({ length: 20 }, (_, index) => (
-                <li
-                  key={index}
-                  className="animate-pulse bg-gray-200 rounded-lg p-4"
-                >
-                  <div className="w-full md:h-[350px] bg-white shadow-2xl rounded-lg" />
-                </li>
-              ))
-            : memes.map((meme) => <MemeCard key={meme.id} {...meme} />)}
+          {!loading &&
+            memes.map((meme) => <MemeCard key={meme.id} {...meme} />)}
+
+          {loading &&
+            Array.from({ length: 20 }, (_, index) => (
+              <li
+                key={index}
+                className="animate-pulse bg-gray-200 rounded-lg p-4"
+              >
+                <div className="w-full md:h-[350px] bg-white shadow-2xl rounded-lg" />
+              </li>
+            ))}
         </ul>
       </div>
     </div>
