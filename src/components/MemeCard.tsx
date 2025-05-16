@@ -18,7 +18,7 @@ const MemeCard = (meme: Meme) => {
             alt={meme.title}
             className="w-full md:h-[350px] rounded-lg"
           />
-          <h3 className="text-lg font-semibold mt-2">{meme.title}</h3>
+          <h3 className="text-lg font-semibold mt-2 w-full md:w-[350px] whitespace-nowrap overflow-hidden text-ellipsis">{meme.title}</h3>
         </li>
       
     </>
