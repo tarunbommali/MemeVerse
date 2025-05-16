@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLanguage } from "../store/localesSlice";
 import type { RootState } from "../store/appStore";
 import { useState } from "react";
+import { MdOutlineNavigateNext } from "react-icons/md";
 
 const navMenuList = [
   { name: "Home", path: "/" },
@@ -24,7 +25,8 @@ const Header = () => {
   return (
     <>
       {/* Header */}
-      <header className="flex justify-between px-4 md:px-16 items-center bg-amber-500 text-white p-4">
+ 
+      <header className="flex justify-between fixed top-0 w-full  px-4 md:px-16 items-center bg-amber-500 text-white p-4 z-50">
         <h2 className="text-2xl font-thin">MemeSync</h2>
 
         {/* Desktop Menu */}
@@ -67,29 +69,33 @@ const Header = () => {
 
       {/* Mobile Sidebar (below header) */}
       {menuOpen && (
-        <aside className="bg-amber-100 w-full px-6 py-4 flex flex-col space-y-4 md:hidden transition-all duration-300 shadow-lg">
+        
+        // <aside className="bg-amber-100 w-full px-6 py-4 flex flex-col space-y-4 md:hidden transition-all duration-300 shadow-lg">
+        <aside className="fixed top-16 left-0 w-full  text-4xl font-thin h-full bg-amber-100 px-6 py-4 flex flex-col space-y-4 md:hidden transition-all duration-300 shadow-lg z-50">
+
           {navMenuList.map((item) => (
             <a
               key={item.name}
               href={item.path}
               onClick={() => setMenuOpen(false)}
-              className="text-gray-800 text-lg font-medium hover:text-amber-600"
+              className="text-gray-800 flex justify-between items-center  hover:text-amber-600"
             >
               {item.name}
+              <MdOutlineNavigateNext className="inline-block ml-2 " />
             </a>
           ))}
 
           {/* Mobile Language Selector */}
-          <div className="flex items-center border-[1px] rounded-2xl px-2 py-1 w-fit">
+          <div className="flex  items-center border-[1px]  w-full rounded-2xl px-2 py-1 my-4">
             <MdLanguage className="mr-2 text-xl" />
             <select
               onChange={handleChange}
-              className="text-gray-800 outline-none bg-amber-100"
+              className="text-gray-800 outline-none bg-amber-100 w-full text-3xl"
               value={currentLang}
             >
-              <option value="en">Eng</option>
-              <option value="hi">Hin</option>
-              <option value="te">Tel</option>
+              <option value="en">English</option>
+              <option value="hi">Hindi</option>
+              <option value="te">Telegu</option>
             </select>
           </div>
         </aside>

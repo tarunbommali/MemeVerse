@@ -15,15 +15,19 @@ const App = () => {
       <div className="bg-amber-50 min-h-screen">
         <BrowserRouter>
           <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/teams" element={<Teams />} />
-            </Route>
-            <Route path="/login" element={<Login />} />
-          </Routes>
+          
+          {/* Main Content with padding to prevent overlap */}
+          <div className="pt-20 px-4">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/teams" element={<Teams />} />
+              </Route>
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </div>
     </Provider>
