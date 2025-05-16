@@ -2,10 +2,12 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import localeReducer from "./localesSlice";
-
+import memesReducer from "./memesSlice";
 const appStore = configureStore({
   reducer: {
     locale: localeReducer,
+    memes: memesReducer,
+
   },
 });
 
