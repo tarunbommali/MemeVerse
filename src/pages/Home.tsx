@@ -65,8 +65,8 @@ const Home = () => {
   return (
     <div className="container mx-auto px-2 md:px-4 pb-8">
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {memes.map((meme: { id: string | number; url: string; title: string }) => (
-          <MemeCard  postLink={""} key={meme.id.toString()} {...meme} />
+        {memes.map((meme, idx) => (
+          <MemeCard key={`${meme.postLink ?? ""}${idx}`} {...meme} postLink={meme.postLink || ""} />
         ))}
       </ul>
       {loading && <ShimmerMemeCard />}
